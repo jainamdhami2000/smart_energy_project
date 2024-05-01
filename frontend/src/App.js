@@ -1,21 +1,46 @@
-import logo from "./logo.svg";
-import "./App.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { DatePick } from "./Components/DatePick";
 import { useState } from "react";
+import { ButtonGroup, Container, ToggleButton } from "react-bootstrap";
+import { Vis } from "./Components/Vis";
 function App() {
-  const [startDate, setStartDate] = useState(new Date("05/01/2020"));
-  console.log(startDate);
+  const [pageView, setChecked] = useState(false);
   return (
-    <div className="App">
-      <DatePicker
-        showTimeSelect={true}
-        minDate={new Date("05/01/2020")}
-        maxDate={new Date("05/04/2020")}
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        timeIntervals={60}
-      />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "1rem",
+      }}
+    >
+      <div>
+        <ButtonGroup style={{ width: "10%" }}>
+          <ToggleButton
+            id="toggle-check-pg"
+            type="checkbox"
+            variant="outline-secondary"
+            checked={pageView}
+            onChange={(e) => setChecked(e.currentTarget.checked)}
+            size="md"
+          >
+            Report
+          </ToggleButton>
+          <ToggleButton
+            id="toggle-check-pg"
+            type="checkbox"
+            variant="outline-secondary"
+            checked={!pageView}
+            onChange={(e) => setChecked(!e.currentTarget.checked)}
+            size="md"
+          >
+            Graph
+          </ToggleButton>
+        </ButtonGroup>
+      </div>
+      <hr className="my-4 w-100" />
+      {pageView ? <DatePick /> : <Vis />}
     </div>
   );
 }
