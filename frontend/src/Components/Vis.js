@@ -38,9 +38,15 @@ export const Vis = () => {
               style={{ height: "200px", marginTop: "10px" }}
               disabled
             />
-            <Button className="mt-3" onClick={() => onSubmit(image)}>
-              Ask Question
-            </Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "16px",
+              }}
+            >
+              <Button onClick={() => onSubmit(image)}>Ask Question</Button>
+            </div>
           </Carousel.Item>
         ))}
         {/* <div>Ask Question</div> */}
