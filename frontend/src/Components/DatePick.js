@@ -8,9 +8,27 @@ export const DatePick = () => {
   const [reportContent, setReportContent] = useState(
     "The report will be generated here"
   );
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     //use startdate and checked to make api call
     //result in setReportContent
+    try {
+      setReportContent("Loading....");
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1; // Months are zero-based
+      const day = currentDate.getDate();
+      const hours = currentDate.getHours();
+      let url;
+      if (checked) {
+        url = `http://localhost/5000/?date=${year}-${month}-${day}&hour=${hours}`;
+      } else {
+        url = `http://localhost/5000/?date=${year}-${month}-${day}&?hour=-1}`;
+      }
+      const data = await fetch(url);
+      const response = await data.json();
+      setReportContent(response);
+    } catch {
+      setReportContent("Error");
+    }
   };
   console.log(startDate);
   return (
