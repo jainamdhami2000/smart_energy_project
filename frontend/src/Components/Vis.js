@@ -3,15 +3,17 @@ import { Carousel, Form, Button } from "react-bootstrap";
 
 export const Vis = () => {
   const images = [
-    "https://plus.unsplash.com/premium_photo-1676637000058-96549206fe71",
-    "https://plus.unsplash.com/premium_photo-1676637000264-b9abea8cf2a9",
+    "https://imgtr.ee/images/2024/05/02/41a3d1e31e7476604b0a7ddd9845853c.png",
+    "https://imgtr.ee/images/2024/05/02/e5800448e773c6a0ab4b96a22df3e5e4.png",
+    "https://imgtr.ee/images/2024/05/02/c0f385e13fd45276070e6ce52944e7b6.png",
+    "https://imgtr.ee/images/2024/05/02/3d54f155ce9320fb63caf43448402724.png",
   ];
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("The answer will be generated here");
   const onSubmit = async (image) => {
     try {
       setAnswer("Loading...");
-      const url = `http://localhost/5000/image?id=${imageId}`;
+      const url = `http://localhost/5000/image?id=${image}`;
       const data = await fetch(url, {
         method: "POST",
         headers: {
@@ -31,12 +33,18 @@ export const Vis = () => {
       <Carousel slide={false} style={{ height: "400px" }} interval={null}>
         {images.map((image) => (
           <Carousel.Item key={image}>
-            <img
-              className="d-block w-100"
-              src={image}
-              alt="First slide"
-              style={{ objectFit: "cover", height: "400px", width: "400px" }}
-            />
+            <div style={{ marginRight: "1.7rem" }}>
+              <img
+                className="d-block w-100"
+                src={image}
+                alt="First slide"
+                style={{
+                  objectFit: "cover",
+                  height: "400px",
+                  width: "400px",
+                }}
+              />
+            </div>
             <Form.Control
               type="text"
               placeholder="Ask your question"
