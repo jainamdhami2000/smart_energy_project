@@ -23,11 +23,11 @@ def home():
     llm = ChatGoogleGenerativeAI(model="gemini-pro", convert_system_message_to_human=True)
     result = llm.invoke(
         [
-            SystemMessage(content="you will be given expected and actual energy usage of some appliances for a particular day and month." \
+            SystemMessage(content="you will be given expected and actual energy usage of some appliances for a particular {var}." \
             "Based on the above scenario, give an output to the user highlighting the economical advantage or disadvantage based on their actual use vs expected." \
             "Also highlight the ecological benefit/harm of the current actual use vs expected on environmental factors solely based on the impact user's usage will have.. Do not use numbers for ecological part. Quantify the economic savings."\
             "Also, only give user personalized recommendations and steps regarding how to use save energy for appliances which consumed more energy than expected. Commend them in recommendation section if they saved energy. The response should have these titles - Usage Summary, Economic Advantage/Disadvantage , Ecological Benefit/Harm, Recommendations and Steps. Add emojis wherever possible"),
-            HumanMessage(content="expected RefrigeratorUsage = 122KW , acutal RefrigeratorUsage = 110KW, expectedFurnace Usage = 26KW , actual FurnaceUsage = 30KW, expectedMicrowaveUsage = 6.1KW , actualMicrowaveUsage = 7KW, Day = 17, Month = May. Location = New York City. Per Watt usage = 23 cents"),
+            HumanMessage(content="expected Dishwasher Usage = {dishwasherPredicted}, actual Dishwasher Usage = {dishwasherActual}, expected Home office Usage = {homeOfficePredicted}, actual Home office Usage = {homeOfficeActual}, expected Fridge Usage = {fridgePredicted}, actual Fridge Usage = {fridgeActual}, expected Wine cellar Usage = {wineCellarPredicted}, actual Wine cellar Usage = {wineCellarActual}, expected Garage Door Usage = {garageDoorPredicted}, actual Garage Door Usage = {garageDoorActual}, expected Barn Usage = {barnPredicted}, actual Barn Usage = {barnActual}, expected Well Usage = {wellPredicted}, actual Well Usage = {wellActual}, expected Microwave Usage = {microwavePredicted}, actual Microwave Usage = {microwaveActual}, expected Living Room Usage = {livingRoomPredicted}, actual Living Room Usage = {livingRoomActual}, expected Furnace Usage = {furnacePredicted}, actual Furnace Usage = {furnaceActual}, expected Kitchen Usage = {kitchenPredicted}, actual Kitchen Usage = {kitchenActual}, Day = 17, Month = May. Location = New York City. Per Watt usage = 23 cents")
         ]
     )
     print(result.content)
