@@ -8,10 +8,23 @@ export const Vis = () => {
   ];
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("The answer will be generated here");
-  const onSubmit = (image) => {
-    console.log(image);
-    //use question in body to send request
-    //result in setReportContent
+  const onSubmit = async (image) => {
+    try {
+      setAnswer("Loading...");
+      const url = `http://localhost/5000/image?id=${imageId}`;
+      const data = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: question }),
+      });
+      const response = await data.json();
+      setAnswer(response);
+    } catch (err) {
+      console.log(err);
+      setAnswer("Error");
+    }
   };
   return (
     <div>
