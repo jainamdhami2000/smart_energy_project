@@ -2,35 +2,37 @@ import DatePicker from "react-datepicker";
 import { Button, ButtonGroup, Form, ToggleButton } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+
 export const DatePick = () => {
-  const [startDate, setStartDate] = useState(new Date("05/01/2020"));
+  const [startDate, setStartDate] = useState(new Date("11/01/2020"));
   const [checked, setChecked] = useState(false);
-  const [reportContent, setReportContent] = useState(
-    "The report will be generated here"
-  );
+  const [reportContent, setReportContent] = useState("The report will be generated here");
+
   const onSubmit = async (e) => {
-    //use startdate and checked to make api call
-    //result in setReportContent
     try {
       setReportContent("Loading....");
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1; // Months are zero-based
-      const day = currentDate.getDate();
-      const hours = currentDate.getHours();
+      const currentDate = startDate;
+      const year = startDate.getFullYear();
+      const month = startDate.getMonth() + 1; // Months are zero-based
+      const day = startDate.getDate();
+      const hours = startDate.getHours();
       let url;
       if (checked) {
-        url = `http://localhost/5000/?date=${year}-${month}-${day}&hour=${hours}`;
+        url = `http://127.0.0.1:5000/?date=${year}-${month}-${day}&hour=${hours}`;
       } else {
-        url = `http://localhost/5000/?date=${year}-${month}-${day}&?hour=-1}`;
+        url = `http://127.0.0.1:5000/?date=${year}-${month}-${day}&?hour=-1}`;
       }
       const data = await fetch(url);
       const response = await data.json();
-      setReportContent(response);
+      setReportContent(response.llm_response);
+      // You can also handle the llm_response if needed
     } catch {
       setReportContent("Error");
     }
   };
+
   console.log(startDate);
+
   return (
     <div>
       <div
@@ -44,8 +46,8 @@ export const DatePick = () => {
         <div style={{ marginRight: "16px" }}>
           <DatePicker
             showTimeSelect={checked}
-            minDate={new Date("05/01/2020")}
-            maxDate={new Date("05/04/2020")}
+            minDate={new Date("11/01/2020")} // 1 jan
+            maxDate={new Date("12/16/2020")} // dec 16
             selected={startDate}
             onChange={(date) => setStartDate(date)}
             timeIntervals={60}

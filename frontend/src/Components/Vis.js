@@ -13,16 +13,16 @@ export const Vis = () => {
   const onSubmit = async (image) => {
     try {
       setAnswer("Loading...");
-      const url = `http://localhost/5000/image?id=${image}`;
+      const url = "http://127.0.0.1:5000/langchain"; // Corrected URL
       const data = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: question }),
+        body: JSON.stringify({ image_url: image, user_question: question }), // Corrected JSON payload
       });
       const response = await data.json();
-      setAnswer(response);
+      setAnswer(response.result); // Assuming the response contains a "result" key
     } catch (err) {
       console.log(err);
       setAnswer("Error");
