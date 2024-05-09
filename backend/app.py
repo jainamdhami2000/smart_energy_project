@@ -26,7 +26,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 app = Flask(__name__)
 CORS(app)
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDEfPOFT7Q1xRlVDYvX2sKMR9zeaVE2SXs"
+os.environ["GOOGLE_API_KEY"] = "ENTER_YOUR_API_KEY"
 
 url_appliance = {
   "https://imgtr.ee/images/2024/05/02/41a3d1e31e7476604b0a7ddd9845853c.png" : "FRIDGE",
